@@ -27,7 +27,7 @@
 
 ---
 
-## 🛠Tech Stack
+##Tech Stack
 
 - **Backend:** Python, Flask
 - **Database:** AVL Tree (custom data structure for fast lookups and balance)
