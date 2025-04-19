@@ -1,0 +1,175 @@
+{% extends 'baseDashboard.html' %}
+{% block additional_styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/accountEditStyles.css')}}">
+{% endblock %}
+{% block dash_content %}
+<div class="dashboard-content">
+   <!-- Account Settings Header -->
+   <div class="header">
+      <h2><a class="link" href="{{url_for('page.accounts')}}" >Accounts</a> / Settings / {{ account_name }}</h2>
+   </div>
+   <!-- Navigation Buttons -->
+   <div class="nav-buttons">
+      <button class="nav-btn overview-btn active" onclick="loadOverviewContent()" >
+         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"></path>
+         </svg>
+         Overview
+      </button>
+      <button class="nav-btn account-management-btn" onclick="loadAccountManagementContent()" >
+         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5"></path>
+         </svg>
+         Account Management
+      </button>
+      <button class="nav-btn equity-monitor-btn" onclick="loadEquityMonitorContent()" >
+         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 15l4-4 3 3 5-5"></path>
+         </svg>
+         Equity Monitor
+      </button>
+   </div>
+   <!-- Main Content Area -->
+   <div class="account-content">
+      <!-- Left Section -->
+      <div class="account-info-box">
+         <div class="account-icon-box">
+            <div class="account-icon">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 account-icon">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
+               </svg>
+            </div>
+            <p class="account-name">{{ account_name }}</p>
+            <p class="account-id">{{ account_id }}</p>
+         </div>
+         <div class="account-details">
+            <div class="balance-equity">
+               <div class="balance-equity-item">
+                  <p class="label">Balance</p>
+                  <p class="value">{{ account_balance }}</p>
+               </div>
+               <div class="balance-equity-item">
+                  <p class="label">Equity</p>
+                  <p class="value">{{ account_equity }}</p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Right Section -->
+      <div class="right-content">
+         <div class="account-overview hidden">
+            <div class="overview-content">
+               <h3>Account Details</h3>
+               <div class="chart-container">
+                  <p>Account Owner: {{ account_info['accountOwner'] }}</p>
+                  <p>Owner Email: {{ account_info['accountEmail'] }}</p>
+                  <p>Account Type: {{ account_info['accountType'] }}</p>
+               </div>
+            </div>
+         </div>
+         <div class="account-account-management hidden">
+            <div class="account-management">
+               <!-- Toggle Account Details -->
+               <h3>Manage Account</h3>
+               <div class="toggle-account-details">
+                  <button onclick="toggleAccountDetails()" class="toggle-btn">
+                     Account Details
+                     <icon>
+                        <svg id="toggle-button-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"></path>
+                        </svg>
+                     </icon>
+                  </button>
+                  {% if account_brokerage == 'oanda' %}
+                  <div id="accountDetails" class="account-details-content hidden">
+                     <p>API KEY:</p>
+                     <p class="api-key-text">{{ account_api_key }}</p>
+                     <p>Account ID:</p>
+                     <p class="account-id-text">{{ account_id }}</p>
+                  </div>
+                  {% endif %}
+               </div>
+               <!-- Edit Account Button -->
+               <div class="edit-account">
+                  <button class="edit-btn" onclick="toggleUpdateAccountDiv()">
+                     Edit Account Details
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"></path>
+                     </svg>
+                  </button>
+                  {% if account_brokerage == 'oanda' %}
+                  <form id="update-account-form" class="update-account-form hidden" method="POST" action="{{ url_for('page.view_account_settings', account_id=account_id) }}">
+                  {{ form.hidden_tag() }}
+                     <h3>Update Account Login</h3>
+                     <div class="form-group">
+                        {{ form.api_key.label }}
+                        {{ form.api_key() }}
+                     </div>
+                     <div class="form-group">
+                        {{ form.account_id.label }}
+                        {{ form.account_id() }}
+                     </div>
+                     <div class="form-group">
+                        {{ form.oanda_account_type.label }}
+                        {{ form.oanda_account_type() }}
+                     </div>
+                     <div class="error-message hidden" id="username-error">
+                        Login Failed. Check credentials.
+                     </div>
+                     <!-- Submit Button -->
+                     <div class="form-group">
+                        {{ form.submit(class="submit-btn") }}
+                     </div>
+                  </form>
+                  {% endif %}
+               </div>
+               <!-- Remove Account Button -->
+               <div class="remove-account">
+                  <button class="remove-btn" onclick="toggleConfirmation()">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"></path>
+                     </svg>
+                     Remove Account
+                  </button>
+                  <p class="warning-text hidden"> Remove account from copying? </p>
+                  <button class="remove-account-cancel-btn hidden" onclick="cancelConfirmation()">Cancel</button>
+                  <button class="remove-account-confirm-btn hidden" onclick="">Confirm</button>
+                  <div class="toggle-container">
+                     <span id="toggleLabel">Include Account in Portfolio Value?</span>
+                     <label class="switch">
+                     <input type="checkbox" id="portfolioToggle">
+                     <span class="slider"></span>
+                     </label>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="account-equity_monitor hidden">
+            <div class="equity-protection-tab">
+               <h3>Equity Protection</h3>
+               <div class="toggle-container">
+                  <label for="equityProtection" class="toggle-label">Enable Equity Protection:</label>
+                  <label class="switch">
+                  <input type="checkbox" id="equityProtection">
+                  <span class="slider"></span>
+                  </label>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <script>
+      const accountsSection = document.querySelector('.accounts-section');
+      accountsSection.classList.add('active-section')
+   </script>
+   <script>
+      const accountOwner = "{{ account_owner }}";
+      const accountEmail = "{{ account_email }}";
+      const accountType = "{{ account_type }}";
+      const reportsPreference = "{{ reports_enabled }}";
+   </script>
+   <script src="{{url_for('static', filename='/js/accountSettingsManagement.js')}}"></script>
+   <script src="{{url_for('static', filename='/js/accountTabManagement.js')}}"></script>
+</div>
+{% endblock %}

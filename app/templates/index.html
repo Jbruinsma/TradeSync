@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/landingStyles.css') }}">
+{% endblock %}
+{% block content %}
+<header>
+   <div class="corner-banner">
+      <span class="product-name">Trade Sync</span>
+      <a href="https://justinabruinsma.com/" target="_blank" ><span class="company-name">A <span class="highlight">Bruinsma & Co.</span> Project</span></a>
+   </div>
+   <h1>Expand Your Trading Potential</h1>
+   <p>Automate your trades with our OANDA-compatible copier.</p>
+   <a href="{{url_for('page.login_portal')}}" class="cta-button">Get Started</a>
+   <p>Find out why {{users_count}} {% if users_count == 1 %}trader has{% else %}traders have{% endif %} joined us.</p>
+</header>
+<main>
+   <section id="features">
+      <h2>Key Features</h2>
+      <div class="feature-grid">
+         <div class="feature">
+            <h3>Trade Copying</h3>
+            <p>Mirror trades seamlessly across OANDA accounts.</p>
+         </div>
+         <div class="feature">
+            <h3>Equity Monitor</h3>
+            <p>Track your capital in real time across linked accounts.</p>
+         </div>
+         <div class="feature">
+            <h3>Risk Management</h3>
+            <p>Set custom lot sizes, stop loss, and take profit settings.</p>
+         </div>
+      </div>
+   </section>
+   <section id="cta">
+      <h2>Start Copying Trades Today</h2>
+      <p>Sign up now and automate your trading with ease.</p>
+      <a href="#" class="cta-button">Get Started</a>
+   </section>
+
+<script src="{{ url_for('static', filename='/js/fetch.js') }}"></script>
+
+</main>
+<footer>
+   <p>&copy; 2025 Bruinsma & Co. All rights reserved.</p>
+</footer>
+{% endblock %}

@@ -1,0 +1,83 @@
+/* General Dashboard Styles */
+.dashboard-content {
+    padding: 20px;
+    width: 100%;
+}
+
+.copier-settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.copier-settings-header h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.add-master-account-btn, .action-btn {
+    background-color: #333333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.add-master-account-btn {
+    display: flex;
+    align-items: center;  /* Align the icon and text vertically */
+    gap: 8px;  /* Add space between the icon and the text */
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+}
+
+.action-btn {
+    border-radius: 2px;
+    padding: 3px 4px;
+}
+
+.add-master-account-btn:hover, .action-btn:hover {
+    background-color: #d4af37;
+}
+
+/* Chart Boxes */
+.charts-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.chart-box {
+    border: 1px solid #d4af37;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Table */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #f8f9fa;
+}

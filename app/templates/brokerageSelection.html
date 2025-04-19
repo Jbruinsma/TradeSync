@@ -1,0 +1,36 @@
+{% extends 'baseDashboard.html' %}
+{% block additional_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/addAccountPortalStyles.css') }}">
+{% endblock %}
+{% block dash_content %}
+<div class="add-account-portal-content">
+
+<a class="cancel-link" href="{{ url_for('page.dashboard') }}">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+</svg>
+    Cancel
+</a>
+
+   <div class="add-account-portal-container">
+      <div class="chart-box">
+         <h3>Add Account:</h3>
+         <span class="get-info-span">Select your Brokerage.</span>
+
+         <form action="" method="POST">
+             {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{ form.brokerage.label }}
+                {{ form.brokerage }}
+            </div>
+
+            <div class="form-group">
+                {{ form.submit(class="submit-button") }}
+            </div>
+         </form>
+
+      </div>
+   </div>
+</div>
+{% endblock %}

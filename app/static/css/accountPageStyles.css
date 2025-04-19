@@ -1,0 +1,134 @@
+/* Add Account Button with Icon */
+.add-account-btn, .action-btn {
+    background-color: #333333;
+    color: white;
+}
+
+.add-account-btn:hover, .action-btn:hover {
+    background-color: #d4af37;
+}
+
+.add-account-btn {
+    display: flex;
+    align-items: center;  /* Align the icon and text vertically */
+    gap: 8px;  /* Add space between the icon and the text */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Add Account Icon */
+.add-account-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Accounts Header */
+.accounts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.accounts-header h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Table */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #f8f9fa;
+}
+
+/* Account status colors */
+.active-account {
+    color: #28a745;
+}
+
+.inactive-account {
+    color: #c82828;
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: #28a745;
+}
+
+input:checked + .slider:before {
+    transform: translateX(14px);
+}
+
+/* Action buttons */
+.action-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.add-account-text {
+    text-align: center;
+}
+
+.account-to-be-removed {
+    color: #c82828;
+}

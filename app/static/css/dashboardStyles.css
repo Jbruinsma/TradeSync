@@ -1,0 +1,170 @@
+.dash-title {
+    margin-bottom: 20px;
+}
+
+.dashboard-content {
+    padding: 20px;
+    width: 100%;
+}
+
+/* Chart Boxes */
+.charts-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.chart-box {
+    border: 1px solid #d4af37;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-weight: bold;
+}
+
+.account-totals p {
+    font-size: 14px;
+}
+
+/* Options Section */
+.options-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Ensure the button content (icon + text) is aligned */
+.option-btn {
+    display: flex;
+    align-items: center;  /* Align icon and text vertically */
+    gap: 8px;  /* Space between icon and text */
+    padding: 10px 15px;
+    background: #ffffff;
+    color: #333333;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.option-btn.active {
+    border-bottom: 2px #b4952c solid;
+}
+
+.option-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Table */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #f8f9fa;
+}
+
+.action-btn {
+    padding: 2px 7px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    background-color: #333333;
+}
+
+.action-btn:hover {
+    background-color: #d4af37;
+}
+
+.active-account {
+    color: #28a745;
+}
+
+.disconnect-account {
+    color: #c82828;
+}
+
+/* Hide content sections initially */
+.hidden {
+    display: none;
+}
+
+/* Content Sections */
+.tab-content {
+    margin-top: 20px;
+}
+
+.add-account-starter-container {
+    display: flex;
+    justify-content: center;
+    /*align-items: center; !* Center the content vertically *!*/
+    height: auto;
+}
+
+.add-account-starter-content {
+    text-align: center;
+    width: 500px;
+    border: 1px solid #d4af37;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-account-starter-content h2 {
+    font-family: "Instrument Serif", sans-serif;
+    margin-bottom: 10px;
+}
+
+.clarifying-text {
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.button-with-icon {
+    display: flex; /* Use flexbox for button contents */
+    align-items: center; /* Center icon and text vertically */
+    background-color: #333333;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-with-icon svg {
+    margin-left: 8px; /* Space between text and icon */
+    height: 16px; /* Icon size */
+    width: 16px; /* Icon size */
+}
+
+.button-with-icon:hover {
+    background: #d4af37; /* Change background on hover */
+}
+
+.positive { color: #28a745; }
+.negative { color: #c82828; }
+.neutral { color: black; }

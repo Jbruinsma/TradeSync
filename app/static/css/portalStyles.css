@@ -1,0 +1,128 @@
+/* General Styles */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+    background-color: #faf9f6;
+    color: #333333;
+    text-align: center;
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #000000;
+    color: #faf9f6;
+    padding: 10px 20px;
+    z-index: 1000;
+}
+
+/* Corner Banner */
+.corner-banner {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    text-align: left;
+    line-height: 1.3;
+}
+
+.corner-banner a {
+    text-decoration: none;
+}
+
+.banner-name {
+    text-decoration: none;
+    color: white;
+}
+
+.product-name {
+    display: block;
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #d4af37;
+}
+
+.company-name {
+    display: block;
+    font-size: 0.9em;
+    color: #faf9f6;
+    opacity: 0.9;
+}
+
+.highlight, .product-name, header h1 {
+    font-family: "Instrument Serif", sans-serif;
+}
+
+/* Login Form Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: auto;
+    margin-top: 150px; /* Push it below the header */
+}
+
+/* Login Form */
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    position: relative;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+/* Input Focus Effect */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #d4af37;
+    outline: none;
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+}
+
+/* Submit Button */
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #d4af37;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #b4952c;
+}
+
+/* Links */
+.links {
+    margin-top: 10px;
+}
+
+.links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 0.9em;
+    transition: color 0.3s;
+}
+
+.links a:hover {
+    color: #d4af37;
+}

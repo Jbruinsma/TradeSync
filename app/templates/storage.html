@@ -1,0 +1,760 @@
+<div class="settings-container">
+    <div class="title-container">
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"></path>
+            </svg>
+            Personal Info
+        </h2>
+    </div>
+       <form action="/your-form-action" method="POST">
+  <div class="info-container">
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <div class="error-message hidden" id="username-error">
+    The username you entered already exists.
+</div>
+        <input type="text" id="username" name="username" placeholder="{{ account_username }}" required>
+    </div>
+    <!-- Submit button here -->
+    <button class="username-change-submit" type="submit">Update</button>
+  </div>
+</form>
+       <div class="delete-account-container">
+    <h3>Delete Account</h3>
+    <p class="warning-text">Deleting your account is permanent and cannot be undone.</p>
+    <button class="delete-btn">Delete Account</button>
+           <button onclick="buttonControl('cancel')" class="delete-btn-cancel hidden">Cancel</button>
+           <button class="delete-btn-confirm hidden">Confirm</button>
+</div>
+       </div>
+
+  SETTINGS TAB
+
+<div class="settings-container">
+    <div class="title-container">
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"></path>
+            </svg>
+            Settings
+        </h2>
+    </div>
+       <form action="/your-form-action" method="POST">
+    <!-- Currency selection dropdown -->
+    <div class="form-group">
+        <label for="currency">Currency:</label>
+        <select id="currency" name="currency" required>
+            <option value="" disabled>Select a currency</option>
+            <option value="USD" selected>USD - United States Dollar</option>
+            <option value="EUR">EUR - Euro</option>
+            <option value="GBP">GBP - British Pound</option>
+            <option value="JPY">JPY - Japanese Yen</option>
+            <!-- Add more currencies as needed -->
+        </select>
+    </div>
+
+    <!-- Submit button -->
+    <button class="username-change-submit" type="submit">Update</button>
+</form>
+
+    <form action="/your-form-action" method="POST">
+    <!-- Time Zone selection dropdown -->
+    <div class="form-group">
+        <label for="timezone">Select Time Zone:</label>
+        <select id="timezone" name="timezone">
+            <option value="" disabled>Select a time zone</option>
+            <option value="EST" selected>EST - Eastern Standard Time (UTC -5)</option>
+            <option value="UTC">UTC - Coordinated Universal Time</option>
+            <option value="CST">CST - Central Standard Time (UTC -6)</option>
+            <option value="MST">MST - Mountain Standard Time (UTC -7)</option>
+            <option value="PST">PST - Pacific Standard Time (UTC -8)</option>
+            <option value="GMT">GMT - Greenwich Mean Time</option>
+            <option value="CET">CET - Central European Time (UTC +1)</option>
+            <option value="IST">IST - Indian Standard Time (UTC +5:30)</option>
+            <option value="JST">JST - Japan Standard Time (UTC +9)</option>
+            <!-- Add more time zones as needed -->
+        </select>
+    </div>
+
+    <!-- Submit button -->
+    <button class="username-change-submit" type="submit">Update</button>
+</form>
+       </div>
+
+  PASSWORD TAB
+
+<div class="settings-container">
+    <div class="title-container">
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"></path>
+            </svg>
+            Password
+        </h2>
+    </div>
+       <form action="/your-form-action" method="POST">
+    <!-- Current password input field -->
+
+    <div class="form-group">
+        <label for="current_password">Current Password:</label>
+        <input type="password" id="current_password" name="current_password" value="" required>
+    </div>
+
+    <!-- New password input field -->
+    <div class="form-group">
+        <label for="new_password">New Password:</label>
+        <input type="password" id="new_password" name="new_password" value="" required>
+    </div>
+
+            <div class="error-message" id="username-error">
+                Your password could not be updated.
+            </div>
+    <!-- Submit button -->
+    <button class="username-change-submit" type="submit">Update</button>
+</form>
+       </div>
+
+{# storage  #}
+
+{% extends 'baseDash.html' %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="/css/accountEditStyles.css">
+{% endblock %}
+
+{% block dash_content %}
+<div class="dashboard-content">
+    <!-- Account Settings Header -->
+    <div class="header">
+        <h2>Accounts / Settings / {{ account_name }}</h2>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <button class="nav-btn overview-btn active">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"></path>
+            </svg>
+            Overview
+        </button>
+        <button class="nav-btn account-management-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5"></path>
+            </svg>
+            Account Management
+        </button>
+        <button class="nav-btn equity-monitor-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"></path>
+            </svg>
+            Equity Monitor
+        </button>
+    </div>
+
+    <!-- Account Info Box on the Left and Right Content -->
+    <div class="account-info-container">
+        <!-- Left Side: Account Info Box -->
+
+        <div class="right-content">
+                    <div class="overview-content">
+                        <h3>Account Details </h3>
+                        <div class="chart-container">
+                            <p>Account Owner: {{ account_owner }}</p>
+                            <p>Owner Email: {{ account_email }}</p>
+                            <p>Account Type: {{ account_type }}</p>
+                            <p>Reports Enabled: {{ reports_enabled }}</p>
+                        </div>
+           </div>
+
+        <div class="account-info-box">
+            <div class="account-icon-box">
+                <div class="account-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 account-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
+                    </svg>
+                </div>
+                <p class="account-name">{{ account_name }}</p>
+            </div>
+            <div class="account-details">
+                <div class="balance-equity">
+                    <div class="balance-equity-item">
+                        <p class="label">Balance</p>
+                        <p class="value">${{ account_balance }}</p>
+                    </div>
+                    <div class="balance-equity-item">
+                        <p class="label">Equity</p>
+                        <p class="value">${{ account_equity }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="account-management">
+        <!-- Toggle Account Details -->
+        <div class="toggle-account-details">
+            <button onclick="toggleAccountDetails()" class="toggle-btn">Account Details <icon><svg id="toggle-button-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"></path>
+</svg>
+            </icon>
+ </button>
+            <div id="accountDetails" class="account-details-content hidden">
+                <p>Account Name: {{ account_name }}</p>
+                <p>Account Password: {{ account_password }}</p>
+            </div>
+        </div>
+
+        <!-- Edit Account Button -->
+        <div class="edit-account">
+            <button class="edit-btn" onclick="toggleUpdateAccountDiv()">Edit Account Details
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"></path>
+</svg>
+            </button>
+
+            <form id="update-account-form" class="update-account-form hidden">
+    <h3>Update Account Login</h3>
+
+    <!-- Username Input -->
+    <div class="form-group">
+        <label for="new-username">Username</label>
+        <input type="text" id="new-username" name="new-username" placeholder="Username" required />
+    </div>
+
+    <!-- Password Input -->
+    <div class="form-group">
+        <label for="new-password">Password</label>
+        <input type="password" id="new-password" name="new-password" placeholder="Password" required />
+    </div>
+                <div class="error-message hidden" id="username-error">
+         Login Failed. Check credentials.
+        </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="submit-btn">Login</button>
+</form>
+
+
+        </div>
+
+        <!-- Remove Account Button -->
+        <div class="remove-account">
+            <button class="remove-btn" onclick="toggleConfirmation()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"></path>
+</svg>
+
+                Remove Account</button>
+            <p class="warning-text hidden"> Remove account from copying? </p>
+            <button class="remove-account-cancel-btn hidden" onclick="cancelConfirmation()">Cancel</button>
+            <button class="remove-account-confirm-btn hidden" onclick="">Confirm</button>
+        </div>
+    </div>
+
+        </div>
+    </div>
+
+<script src="/js/accountTabManagement.js"></script>
+<script src="/js/accountSettingsManagement.js"></script>
+
+{% endblock %}
+
+{# SETTINGS #}
+{# General Settings #}
+<div class="settings-container">
+               <form action="/your-form-action" method="POST">
+                   <div class="form-group">
+                   <label for="account-name">Custom Account Name:</label>
+                   <input type="text" id="account-name" name="account_name" placeholder="{{ account_name }}">
+                   </div>
+            <div class="form-group">
+                <label for="master-account">Master Account:</label>
+                <select id="master-account" name="master-account" required>
+                    <option value="" disabled>Select a master account</option>
+                    <option value="" selected>None</option>
+                    <option value="">ACCOUNT NULL</option>
+                </select>
+            </div>
+           <button class="username-change-submit submit-btn" type="submit">Update</button>
+        </form>
+    </div>
+
+{# Copying Preferences #}
+
+<div class="settings-container">
+               <form action="/your-form-action" method="POST">
+            <div class="form-group">
+                <label for="trade-types">Trade Types:</label>
+                <select id="trade-types" name="trade-types" required>
+                    <option value="" disabled>Select executable trade types</option>
+                    <option value="all" selected>All</option>
+                    <option value="buy">Buy</option>
+                    <option value="sell">Sell</option>
+                </select>
+            </div>
+                   <div class="form-group">
+                   <label for="order-types">Trade Types:</label>
+                <select id="order-types" name="order-types" required>
+                    <option value="" disabled>Select executable order types</option>
+                    <option value="all" selected>All</option>
+                    <option value="market">Market</option>
+                    <option value="limit">Limit</option>
+                    <option value="stop">Stop</option>
+                </select>
+                   </div>
+
+                   <div class="form-group">
+                   <label for="min-trade-size">Minimum Trade Size (lots):</label>
+            <input type="number" id="min-trade-size" name="min_trade_size" step="0.01" min="0.01" placeholder="0.01">
+
+                   </div>
+                   <div class="form-group">
+
+            <label for="max-trade-size">Maximum Trade Size (lots):</label>
+            <input type="number" id="max-trade-size" name="max_trade_size" step="0.01" min="0.01">
+                   </div>
+                   <div class="form-group">
+            <label for="max-open-positions">Maximum Open Positions:</label>
+            <input type="number" id="max-open-positions" name="max_open_positions" min="1" value="" placeholder="">
+                   </div>
+
+           <button class="username-change-submit submit-btn" type="submit">Update</button>
+        </form>
+    </div>
+
+{# Execution Preferences #}
+
+{# Multiplier Risk Type #}
+
+<div class="settings-container">
+      <form action="/your-form-action" method="POST">
+         <div class="form-group">
+            <label for="risk-type">Risk Type:</label>
+            <select id="risk-type" name="risk_type">
+               <option value="fixed">Fixed Lots</option>
+               <option value="multiplier">Multiplier</option>
+            </select>
+         </div>
+         <div class="form-group-multiplier-settings">
+            <div class="title-container">
+               <h2>Multiplier Settings</h2>
+            </div>
+            <label for="multiplier-factor">Multiplier Factor:</label>
+            <input type="number" id="multiplier-factor" name="multiplier_factor" step="0.1" min="0.1" placeholder="1.0">
+            <label class="switch">
+            Enable Account Balance Scaling:
+            <input type="checkbox" checked>
+            <span class="slider round"></span>
+            </label>
+         </div>
+         <button class="username-change-submit submit-btn" type="submit">Update</button>
+      </form>
+   </div>
+
+{# Fixed Lot Risk Type #}
+
+<div class="form-group-fixed-lot-settings">
+    <div class="title-container">
+        <h2>Fixed Lot Settings</h2>
+    </div>
+    <label for="fixed-lot-size">Fixed Lot Size:</label>
+    <input type="number" id="fixed-lot-size" name="fixed_lot_size" step="0.01" min="0.01" placeholder="">
+    <label for="fixed-sl">Fixed Stop Loss (pips):</label>
+    <input type="number" id="fixed-sl" name="fixed_sl" step="1" min="0" placeholder="">
+    <label for="fixed-tp">Fixed Take Profit (pips):</label>
+    <input type="number" id="fixed-tp" name="fixed_tp" step="1" min="0" placeholder="">
+</div>
+
+{# Risk Type Settings Continued?? #}
+
+<form action="/your-form-action" method="POST">
+         <div class="form-group">
+            <label for="risk-type">Risk Type:</label>
+            <select id="risk-type" name="risk_type">
+               <option value="fixed" >Fixed Lots</option>
+               <option value="multiplier" selected>Multiplier</option>
+            </select>
+         </div>
+         <div class="risk-type-settings-container form-group-fixed-lot-settings">
+             <div class="title-container">
+               <h2>Multiplier Settings</h2>
+            </div>
+            <label for="multiplier-factor">Multiplier Factor:</label>
+            <input type="number" id="multiplier-factor" name="multiplier_factor" step="0.1" min="0.1" placeholder="1.0">
+            <label class="switch">
+            Enable Account Balance Scaling:
+            <input type="checkbox" checked>
+            <span class="slider round"></span>
+            </label>
+         </div>
+         <button class="username-change-submit submit-btn" type="submit">Update</button>
+      </form>
+
+{# WHO KNOWS #}
+
+<div class="copier-settings-edit-header">
+      <h2>Add Account</h2>
+   </div>
+
+    <form action="/your-form-action" method="POST">
+
+<div class="general-settings-container">
+
+    <div class="settings-label" >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"></path>
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
+</svg>General
+    </div>
+                   <div class="form-group">
+                   <label for="account-name">Custom Account Name:</label>
+                   <input type="text" id="account-name" name="account_name" placeholder="{{ account_name }}">
+                   </div>
+            <div class="form-group">
+                <label for="master-account">Master Account:</label>
+                <select id="master-account" name="master-account" required>
+                    <option value="" disabled>Select a master account</option>
+                    <option value="" selected>None</option>
+                    <option value="">ACCOUNT NULL</option>
+                </select>
+            </div>
+
+</div>
+
+        <div class="copying-preferences-container">
+
+            <div class="settings-label">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z"></path>
+</svg>Copying Preferences
+</div>
+
+            <div class="form-group">
+                <label for="trade-types">Trade Types:</label>
+                <select id="trade-types" name="trade-types" required>
+                    <option value="" disabled>Select executable trade types</option>
+                    <option value="all" selected>All</option>
+                    <option value="buy">Buy</option>
+                    <option value="sell">Sell</option>
+                </select>
+            </div>
+                   <div class="form-group">
+                   <label for="order-types">Trade Types:</label>
+                <select id="order-types" name="order-types" required>
+                    <option value="" disabled>Select executable order types</option>
+                    <option value="all" selected>All</option>
+                    <option value="market">Market</option>
+                    <option value="limit">Limit</option>
+                    <option value="stop">Stop</option>
+                </select>
+                   </div>
+
+        </div>
+
+        <div class="risk-management-content">
+
+            <div class="settings-label">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z"></path>
+</svg>Risk Management
+</div>
+
+            <div class="form-group">
+               <label for="min-trade-size">Minimum Trade Size (lots):</label>
+               <input type="number" id="min-trade-size" name="min_trade_size" step="0.01" min="0.01" placeholder="0.01">
+            </div>
+            <div class="form-group">
+               <label for="max-trade-size">Maximum Trade Size (lots):</label>
+               <input type="number" id="max-trade-size" name="max_trade_size" step="0.01" min="0.01">
+            </div>
+            <div class="form-group">
+               <label for="max-open-positions">Maximum Open Positions:</label>
+               <input type="number" id="max-open-positions" name="max_open_positions" min="1" value="" placeholder="">
+            </div>
+            <div class="form-group">
+               <label for="risk-type">Risk Type:</label>
+               <select id="risk-type" name="risk_type">
+                  <option value="fixed">Fixed Lots</option>
+                  <option value="multiplier">Multiplier</option>
+               </select>
+            </div>
+
+        </div>
+
+        <div class="executions-content">
+
+            <div class="settings-label">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"></path>
+</svg>Executions
+</div>
+
+              <div class="form-group">
+              <label for="trade-closure">Trade Closure Handling:</label>
+        <select id="trade-closure" name="trade_closure">
+            <option value="" disabled selected>Select a trade closure approach</option>
+            <option value="auto">Follow Master</option>
+            <option value="manual">Manage Independently</option>
+        </select>
+              </div>
+
+        </div>
+
+        </form>
+
+
+{# 2/14/2025 add account content (Settins) #}
+
+<div class="add-account-content">
+
+<form action="/your-form-action" method="POST">
+<div class="general-settings-container">
+
+    <div class="settings-label" >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"></path>
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
+</svg>General
+    </div>
+
+    <div class="form-group">
+                   <label for="account-name">Custom Account Name:</label>
+                   <input type="text" id="account-name" name="account_name" placeholder="{{ account_name }}">
+    </div>
+
+    <div class="form-group">
+         <label for="master-account">Master Account:</label>
+                <select id="master-account" name="master-account" required>
+                    <option value="" disabled>Select a master account</option>
+                    <option value="" selected>None</option>
+                    <option value="">ACCOUNT NULL</option>
+                </select>
+    </div>
+
+</div>
+
+<div class="copying-preferences-container">
+
+<div class="settings-label">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z"></path>
+</svg>Copying Preferences
+</div>
+
+    <div class="form-group">
+                <label for="trade-types">Trade Types:</label>
+                <select id="trade-types" name="trade-types" required>
+                    <option value="" disabled>Select executable trade types</option>
+                    <option value="all" selected>All</option>
+                    <option value="buy">Buy</option>
+                    <option value="sell">Sell</option>
+                </select>
+            </div>
+                   <div class="form-group">
+                   <label for="order-types">Trade Types:</label>
+                <select id="order-types" name="order-types" required>
+                    <option value="" disabled>Select executable order types</option>
+                    <option value="all" selected>All</option>
+                    <option value="market">Market</option>
+                    <option value="limit">Limit</option>
+                    <option value="stop">Stop</option>
+                </select>
+                   </div>
+
+</div>
+
+<div class="risk-management-container">
+
+<div class="settings-label">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z"></path>
+</svg>Risk Management
+</div>
+
+    <div class="form-group">
+               <label for="min-trade-size">Minimum Trade Size (lots):</label>
+               <input type="number" id="min-trade-size" name="min_trade_size" step="0.01" min="0.01" placeholder="0.01">
+            </div>
+            <div class="form-group">
+               <label for="max-trade-size">Maximum Trade Size (lots):</label>
+               <input type="number" id="max-trade-size" name="max_trade_size" step="0.01" min="0.01">
+            </div>
+            <div class="form-group">
+               <label for="max-open-positions">Maximum Open Positions:</label>
+               <input type="number" id="max-open-positions" name="max_open_positions" min="1" value="" placeholder="">
+            </div>
+            <div class="form-group">
+               <label for="risk-type">Risk Type:</label>
+               <select id="risk-type" name="risk_type">
+                  <option value="fixed">Fixed Lots</option>
+                  <option value="multiplier">Multiplier</option>
+               </select>
+            </div>
+
+</div>
+
+<div class="executions-container">
+
+<div class="settings-label">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"></path>
+</svg>Executions
+</div>
+
+    <div class="form-group">
+              <label for="trade-closure">Trade Closure Handling:</label>
+        <select id="trade-closure" name="trade_closure">
+            <option value="" disabled selected>Select a trade closure approach</option>
+            <option value="auto">Follow Master</option>
+            <option value="manual">Manage Independently</option>
+        </select>
+              </div>
+
+</div>
+
+    <div class="risk-type-content">
+
+        <div class="title-container">
+        <h2>Fixed Lot Settings</h2>
+    </div>
+    <label for="fixed-lot-size">Fixed Lot Size:</label>
+    <input type="number" id="fixed-lot-size" name="fixed_lot_size" step="0.01" min="0.01" placeholder="">
+    <label for="fixed-sl">Fixed Stop Loss (pips):</label>
+    <input type="number" id="fixed-sl" name="fixed_sl" step="1" min="0" placeholder="">
+    <label for="fixed-tp">Fixed Take Profit (pips):</label>
+    <input type="number" id="fixed-tp" name="fixed_tp" step="1" min="0" placeholder="">
+
+    </div>
+
+    <div class="submit-container">
+        <button type="submit" class="submit-button">Add Account</button>
+    </div>
+
+</form>
+
+<script src="/js/loadRiskTypeContent.js" ></script>
+
+</div>
+
+{# V2 #}
+
+<div class="add-account-content">
+   <form>
+      <div class="top-settings-container">
+         <div class="general-settings-content">
+            <div class="settings-label" >
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
+               </svg>
+               General
+            </div>
+            <div class="form-group">
+               <label for="account-name">Custom Account Name:</label>
+               <input type="text" id="account-name" name="account_name" placeholder="{{ account_name }}">
+            </div>
+            <div class="form-group">
+               <label for="master-account">Master Account:</label>
+               <select id="master-account" name="master-account" required>
+                  <option value="" disabled>Select a master account</option>
+                  <option value="" selected>None</option>
+                  <option value="">ACCOUNT NULL</option>
+               </select>
+            </div>
+         </div>
+         <div class="copying-preferences-settings-content">
+            <div class="settings-label">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z"></path>
+               </svg>
+               Copying Preferences
+            </div>
+            <div class="form-group">
+               <label for="trade-types">Trade Types:</label>
+               <select id="trade-types" name="trade-types" required>
+                  <option value="" disabled>Select executable trade types</option>
+                  <option value="all" selected>All</option>
+                  <option value="buy">Buy</option>
+                  <option value="sell">Sell</option>
+               </select>
+            </div>
+            <div class="form-group">
+               <label for="order-types">Trade Types:</label>
+               <select id="order-types" name="order-types" required>
+                  <option value="" disabled>Select executable order types</option>
+                  <option value="all" selected>All</option>
+                  <option value="market">Market</option>
+                  <option value="limit">Limit</option>
+                  <option value="stop">Stop</option>
+               </select>
+            </div>
+         </div>
+         <div class="risk-management-settings-content">
+            <div class="settings-label">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z"></path>
+               </svg>
+               Risk Management
+            </div>
+            <div class="form-group">
+               <label for="min-trade-size">Minimum Trade Size (lots):</label>
+               <input type="number" id="min-trade-size" name="min_trade_size" step="0.01" min="0.01" placeholder="0.01">
+            </div>
+            <div class="form-group">
+               <label for="max-trade-size">Maximum Trade Size (lots):</label>
+               <input type="number" id="max-trade-size" name="max_trade_size" step="0.01" min="0.01">
+            </div>
+            <div class="form-group">
+               <label for="max-open-positions">Maximum Open Positions:</label>
+               <input type="number" id="max-open-positions" name="max_open_positions" min="1" value="" placeholder="">
+            </div>
+            <div class="form-group">
+               <label for="risk-type">Risk Type:</label>
+               <select id="risk-type" name="risk_type">
+                  <option value="fixed">Fixed Lots</option>
+                  <option value="multiplier">Multiplier</option>
+               </select>
+            </div>
+         </div>
+         <div class="executions-content-settings">
+            <div class="settings-label">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"></path>
+               </svg>
+               Executions
+            </div>
+            <div class="form-group">
+               <label for="trade-closure">Trade Closure Handling:</label>
+               <select id="trade-closure" name="trade_closure">
+                  <option value="" disabled selected>Select a trade closure approach</option>
+                  <option value="auto">Follow Master</option>
+                  <option value="manual">Manage Independently</option>
+               </select>
+            </div>
+         </div>
+      </div>
+      <div class="bottom-settings-container">
+{#   BOTTOM DIV   #}
+         <div class="risk-type-settings-div">
+
+             <div class="title-container">
+        <h2>Fixed Lot Settings</h2>
+    </div>
+             <div class="form-group">
+
+    <label for="fixed-lot-size">Fixed Lot Size:</label>
+    <input type="number" id="fixed-lot-size" name="fixed_lot_size" step="0.01" min="0.01" placeholder="">
+             </div>
+             <div class="form-group">
+    <label for="fixed-sl">Fixed Stop Loss (pips):</label>
+    <input type="number" id="fixed-sl" name="fixed_sl" step="1" min="0" placeholder="">
+             </div>
+             <div class="form-group">
+    <label for="fixed-tp">Fixed Take Profit (pips):</label>
+    <input type="number" id="fixed-tp" name="fixed_tp" step="1" min="0" placeholder="">
+             </div>
+         </div>
+         <button type="submit" class="submit-button">Add Account</button>
+      </div>
+   </form>
+</div>

@@ -1,0 +1,78 @@
+/* General Layout for Copier Logs */
+.logs-container {
+    padding: 20px;
+    width: 100%;
+}
+
+.logs-title {
+    margin-bottom: 20px;
+}
+
+.logs-title h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+/* Table Container */
+.table-container {
+    overflow-x: auto;
+}
+
+/* Logs Table Styling */
+.logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.logs-table th, .logs-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.logs-table th {
+    background: #f8f9fa;
+}
+
+.logs-table td {
+    color: #555;
+}
+
+.logs-table tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.logs-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Status Column Styling */
+.status {
+    font-weight: bold;
+}
+
+.status.open-trade {
+    color: #28a745; /* Green for active */
+}
+
+.status.inactive {
+    color: #dc3545; /* Red for inactive */
+}
+
+/* Additional styles for Profit */
+.logs-table td:last-child {
+    font-weight: bold;
+}
+
+.logs-table td:last-child {
+    color: #28a745; /* Green for positive profit */
+}
+
+.logs-table td:last-child.negative {
+    color: #dc3545; /* Red for negative profit */
+}

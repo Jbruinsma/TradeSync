@@ -1,0 +1,167 @@
+{% extends 'baseDashboard.html' %}
+{% block title %}
+Trade Sync: Dashboard
+{% endblock %}
+{% block additional_styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/dashboardStyles.css') }}">
+{% endblock %}
+{% block dash_content %}
+<div class="dashboard-content">
+   <div class="dash-title">
+      <h2>Dashboard</h2>
+   </div>
+   {% if accounts | length > 0 %}
+   <!-- Chart Boxes -->
+   <div class="charts-container">
+      <div class="chart-box portfolio Value">
+         <h3>Total Portfolio Value:</h3>
+         <p>{{ account_portfolio_value }}</p>
+      </div>
+      <div class="chart-box">Chart 2</div>
+      <div class="chart-box">Chart 3</div>
+      <div class="chart-box account-totals">
+          <h3>Accounts:</h3>
+          <p>Master Accounts: {{ user_master_accounts_total }}</p>
+          <p>Child Accounts: {{ user_child_accounts_total }}</p>
+      </div>
+   </div>
+   <!-- Options Section -->
+   <div class="options-container">
+      <button class="option-btn account-btn active" onclick="showAccountTable()">
+         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"></path>
+         </svg>
+         Account
+      </button>
+      <button class="option-btn open-positions-btn" onclick="showOpenPositionsTable()">
+         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"></path>
+         </svg>
+         Open Positions
+      </button>
+   </div>
+   <!-- Content Sections -->
+   <div id="account-section" class="tab-content">
+      <div class="table-container">
+         <table>
+            <thead>
+               <tr>
+                  <th>Status</th>
+                  <th>Account</th>
+                  <th>Balance</th>
+                  <th>Equity</th>
+                  <th>Open Trades</th>
+                  <th>Open (P/L)</th>
+                  <th>Day (P/L)</th>
+                  <th>Week (P/L)</th>
+                  <th>Monthly (P/L)</th>
+                  <th>Total (P/L)</th>
+                  <th>Actions</th>
+               </tr>
+            </thead>
+            <tbody>
+   {% for account in accounts %}
+   <tr>
+      <td class="account-status {% if account.status | lower == 'active' %}active-account{% else %}inactive-account{% endif %}">
+         {{ account.status | capitalize }}
+      </td>
+      <td>{{ account.customName }}</td>
+      <td>${{ account.balance }}</td>
+      <td>{{ account.equity }}</td>
+      <td>{{ account.openTrades }}</td>
+      <td>{{ account.openPl }}</td>
+      <td>{{ account.dayPl }}</td>
+      <td>{{ account.weekPl }}</td>
+      <td>{{ account.monthPl }}</td>
+      <td>
+         {% if account.totalPl > 0 %}
+         <span class="positive">+ ${{ account.totalPl }}</span>
+         {% elif account.totalPl < 0 %}
+         <span class="negative">${{ account.totalPl }}</span>
+         {% else %}
+         <span class="neutral">$0.00</span>
+         {% endif %}
+      </td>
+      <td><button class="action-btn">Manage</button></td>
+   </tr>
+   {% endfor %}
+</tbody>
+         </table>
+      </div>
+   </div>
+   <div id="open-positions-section" class="tab-content hidden">
+      <!-- Open Positions Table -->
+      <div class="table-container">
+         <table>
+            <thead>
+               <tr>
+                  <th>Account</th>
+                  <th>Account #</th>
+                  <th>Trade ID</th>
+                  <th>Open Time</th>
+                  <th>Symbol</th>
+                  <th>Type</th>
+                  <th>Lots</th>
+                  <th>Entry Price</th>
+                  <th>Stop Loss</th>
+                  <th>Take Profit</th>
+                  <th>P/L</th>
+                  <th>Actions</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>Account 1</td>
+                  <td>12345</td>
+                  <td>001</td>
+                  <td>2025-02-08 10:00</td>
+                  <td>EUR/USD</td>
+                  <td>Buy</td>
+                  <td>1.00</td>
+                  <td>1.1500</td>
+                  <td>1.1450</td>
+                  <td>1.1600</td>
+                  <td>$50</td>
+                  <td><button class="action-btn">Close</button></td>
+               </tr>
+               <tr>
+                  <td>Account 2</td>
+                  <td>67890</td>
+                  <td>002</td>
+                  <td>2025-02-07 14:30</td>
+                  <td>AAPL</td>
+                  <td>Sell</td>
+                  <td>0.50</td>
+                  <td>150.00</td>
+                  <td>155.00</td>
+                  <td>145.00</td>
+                  <td>-$100</td>
+                  <td><button class="action-btn">Close</button></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+   {% else %}
+   <div class="add-account-starter-container">
+      <div class="add-account-starter-content">
+         <h2>Welcome!</h2>
+         <p class="clarifying-text">Add a Master Account to get started.</p>
+         <a class="link" href="{{url_for('page.brokerage_selection', account_role='master')}}">
+            <button class="button-with-icon">
+               Next
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"></path>
+               </svg>
+            </button>
+         </a>
+      </div>
+   </div>
+   {% endif %}
+   <script>
+      const dashboardSection = document.querySelector('.dashboard-section');
+      dashboardSection.classList.add('active-section')
+   </script>
+   <script src="{{url_for('static', filename= '/js/dash.js')}}"></script>
+</div>
+{% endblock %}

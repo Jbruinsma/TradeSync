@@ -1,0 +1,30 @@
+{% extends 'baseDashboard.html' %}
+{% block additional_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/addRiskSettingsStyles.css') }}">
+{% endblock %}
+{% block dash_content %}
+<div class="add-account-header">
+   <h2></h2>
+</div>
+<div class="risk-settings-div">
+   <div class="risk-settings-content">
+      <h3>Risk Settings: Multiplier</h3>
+      <form method="POST" action="{{ url_for('page.add_child_account_multiplier_settings', brokerage= brokerage) }}">
+          {{ form.hidden_tag() }}
+         <div class="form-group">
+            {{ form.multiplier_factor.label }}
+            {{ form.multiplier_factor(class="multiplier-factor") }}
+         </div>
+         <p class="risk-amount-text">For every 1 Lot traded on <span class="master-acc-span">{{ master_account }}</span>,</p>
+         <p class="risk-amount-text"><span class="child-risk-amount">1</span> <span class="lots-word">Lot</span> will be traded on this account.</p>
+         {{ form.submit(class="submit-button") }}
+      </form>
+   </div>
+   <script src="{{ url_for("static", filename="/js/riskMultiplierEdit.js") }}" ></script>
+   <script>
+      const accountsSection = document.querySelector('.accounts-section');
+      accountsSection.classList.add('active-section')
+   </script>
+
+</div>
+{% endblock %}

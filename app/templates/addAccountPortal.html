@@ -1,0 +1,29 @@
+{% extends 'baseDashboard.html' %}
+{% block additional_styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/addAccountPortalStyles.css')}}">
+{% endblock %}
+{% block dash_content %}
+<div class="add-account-header">
+    <h2><a class="link" href="{{url_for('page.accounts')}}" >Accounts</a> / Add Account</h2>
+</div>
+<div class="add-account-portal-content">
+   <div class="add-account-portal-container">
+      <div class="chart-box">
+         <h3>Add Account:</h3>
+         <span>What is the role of this account?</span>
+         <div class="button-container">
+            <a class="link" href="{{url_for('page.brokerage_selection', account_role='master')}}">
+            <button class="master-btn" >Master</button>
+            </a>
+             <a class="link" href="{{url_for('page.brokerage_selection', account_role='child')}}">
+            <button class="child-btn" >Child</button>
+            </a>
+         </div>
+      </div>
+   </div>
+   <script>
+      const accountsSection = document.querySelector('.accounts-section');
+      accountsSection.classList.add('active-section')
+   </script>
+</div>
+{% endblock %}

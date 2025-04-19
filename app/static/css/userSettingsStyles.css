@@ -1,0 +1,224 @@
+.settings-container, .user-info {
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    margin: 20px 150px auto;
+}
+
+.user-info {
+    width: 350px;
+    text-align: center;
+}
+
+.user-info-icon {
+    width: 36px;
+    height: 36px;
+}
+
+.accounts-container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.accounts-container-box p {
+    font-size: 16px;
+}
+
+.user-info p {
+    font-size: 16px;
+    color: #333333;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+}
+
+.button-stack {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    width: 200px; /* Set a fixed width */
+    gap: 10px; /* Space between buttons */
+}
+
+.stack-btn {
+    display: flex;
+    align-items: center; /* Aligns icon and text */
+    justify-content: center; /* Centers content horizontally */
+    gap: 8px; /* Space between icon and text */
+    background-color: #ffffff;
+    color: #333333;
+    border: none;
+    padding: 4px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 200px; /* Set a fixed width */
+    text-align: center;
+}
+
+.stack-btn:hover {
+    color: #d4af37;
+}
+
+.title-container {
+    display: inline-flex;
+    align-items: center; /* Ensures both icon and text are aligned */
+    gap: 10px; /* Space between icon and text */
+    margin-bottom: 15px;
+}
+
+.title-container h2 {
+    display: flex;
+    align-items: center; /* Ensures perfect vertical alignment */
+    gap: 8px; /* Space between icon and text */
+    font-size: 20px; /* Adjust as needed */
+    margin-bottom: 0;
+}
+
+.title-container svg {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+/* USER INFO TAB */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #475569;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input:focus {
+    border-color: #d4af37;
+    outline: none;
+}
+
+/* Form Layout */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.username-change-submit, .delete-btn, .delete-btn-cancel ,.delete-btn-confirm {
+    padding: 2px 7px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    background-color: #333333;
+}
+
+.username-change-submit:hover, .delete-btn-cancel:hover {
+    background-color: #d4af37;
+}
+
+button:focus {
+    outline: none;
+}
+
+.delete-account-container {
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #b4952c;
+    width: 100%;
+    margin: 20px auto auto;
+    text-align: left;
+}
+
+.delete-account-container h3 {
+    color: #c82333;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.warning-text {
+    color: #c82333;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.delete-btn:hover, .delete-btn-confirm:hover {
+    background-color: #c82333;
+}
+
+.delete-btn:focus {
+    outline: none;
+}
+
+/* General Heading Styling */
+h2 {
+    font-size: 22px;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border: 1px solid #f5c6cb;
+}
+
+.error-message.show {
+    display: block; /* Show the error message when needed */
+}
+
+/* SETTINGS TAB */
+
+select {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #ffffff;
+    color: #333333;
+    transition: border-color 0.3s ease;
+}
+
+select:focus {
+    border-color: #b4952c;
+    outline: none;
+}
+
+select option {
+    font-size: 14px;
+    padding: 10px;
+}
+
+.active-tab {
+    .tab-icon{
+        color: #b4952c;
+    }
+}
+
+.hidden {
+    display: none;
+}

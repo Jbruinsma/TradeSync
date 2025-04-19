@@ -1,0 +1,45 @@
+{% extends 'baseDashboard.html' %}
+{% block additional_styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/accountViewStyles.css')}}">
+{% endblock %}
+{% block dash_content %}
+<div class="view-account-content">
+   <div class="view-account-header">
+      <h2><a class="link" href="{{url_for('page.accounts')}}">Accounts</a> / Analytics / {{ account_id }}</h2>
+   </div>
+   <div class="charts-container">
+      <div class="chart-box">
+         <h3>Account Balance</h3>
+         <p>{{ formatted_account_balance }}</p>
+         <span class="clarifying-message">Your account is {% if account_growth_percentage > 0 %}up{% elif account_growth_percentage < 0 %}down{% else %}flat{% endif %} <span>{{ formatted_account_growth }}</span> in total.</span>
+      </div>
+      <div class="chart-box">
+         <h3>Account Growth</h3>
+         <p>{{ formatted_account_growth }}</p>
+         <span class="clarifying-message">This account has made a
+         {% if account_growth_percentage > 0 %}
+         <span class="positive">+ {{ account_growth_percentage }}</span>
+         {% elif account_growth_percentage < 0 %}
+         <span class="negative">- {{ account_growth_percentage }}</span>
+         {% else %}
+         <span class="neutral">0</span>
+         {% endif %}
+         % return.</span>
+      </div>
+      <div class="chart-box">
+         <h3>Open Positions</h3>
+         <p>{{ open_positions }}</p>
+         <span class="clarifying-message">You have <span>{{ open_positions }}</span> positions open.</span>
+      </div>
+      <div class="chart-box">
+         <h3>Best Winning Trade</h3>
+         <p>+ ${{ best_trade_pl }}</p>
+         <span class="clarifying-message">Your best trade brought in <span>{{ best_trade_pl_percentage }}%</span> profit.</span>
+      </div>
+   </div>
+   <script>
+      const accountsSection = document.querySelector('.accounts-section');
+      accountsSection.classList.add('active-section')
+   </script>
+</div>
+{% endblock %}

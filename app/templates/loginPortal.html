@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/portalStyles.css') }}">
+{% endblock %}
+
+{% block content %}
+<header>
+   <div class="corner-banner">
+      <span class="product-name">Trade Sync</span>
+      <a href="https://justinabruinsma.com/" target="_blank">
+         <span class="company-name">A <span class="highlight">Bruinsma & Co.</span> Project</span>
+      </a>
+   </div>
+   <h1>Welcome.</h1>
+</header>
+
+<div class="container">
+   <form action="{{ url_for('page.login_portal') }}" method="POST">
+      {{ form.csrf_token }}
+
+      <label for="username">{{ form.username.label }}</label>
+      {{ form.username(id="username", placeholder="Username", required="required") }}
+
+      <label for="password">{{ form.password.label }}</label>
+      {{ form.password(id="password", placeholder="Password", required="required") }}
+
+      {{ form.submit(class="submit-button") }}
+
+      <div class="links">
+         <a href="{{ url_for('page.register') }}">Sign Up</a>
+      </div>
+   </form>
+</div>
+{% endblock %}

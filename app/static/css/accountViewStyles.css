@@ -1,0 +1,52 @@
+.link {
+    color: black;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.dashboard-content {
+    padding: 20px;
+    width: 100%;
+}
+
+.view-account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.view-account-header h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.charts-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.chart-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    font-weight: bold;
+}
+
+.chart-box h3 {
+    font-size: 16px;
+}
+
+.clarifying-message {
+    font-size: 13px;
+}
+
+.positive { color: #28a745; }
+.negative { color: #c82828; }
+.neutral { color: black; }

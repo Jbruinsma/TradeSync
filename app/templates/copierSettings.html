@@ -1,0 +1,96 @@
+{% extends 'baseDashboard.html' %}
+{% block title %}
+Trade Sync: Copier Settings
+{% endblock %}
+{% block additional_styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/copierSettingsStyles.css')}}">
+{% endblock %}
+{% block dash_content %}
+<div class="copier-settings-content">
+   <!-- Header Section -->
+   <div class="copier-settings-header">
+      <h2>Copier Settings</h2>
+      <a class="link" href="/add_master_account" >
+         <button class="add-master-account-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+            </svg>
+            Add Master Account
+         </button>
+      </a>
+   </div>
+   <!-- Chart Boxes -->
+   <div class="charts-container">
+      <div class="chart-box portfolio Value">
+         <h3>Total Portfolio Value:</h3>
+         <p>{{ account_portfolio_value }}</p>
+      </div>
+      <div class="chart-box total-master-accounts">
+          <h3>Master Accounts:</h3>
+         <p>{{ account_master_account_sum }}</p>
+      </div>
+      <div class="chart-box total_child-accounts">
+          <h3>Child Accounts:</h3>
+         <p>{{ account_child_account_sum }}</p>
+      </div>
+      <div class="chart-box open-positions-total">
+          <h3>Open Positions:</h3>
+         <p>{{ account_open_positions }}</p>
+      </div>
+   </div>
+   {% if accounts | length > 0 %}
+   <!-- Copier Settings Table -->
+   <div class="table-container">
+      <table>
+         <thead>
+            <tr>
+               <th>Account Name</th>
+               <th>Account ID</th>
+               <th>Copy From</th>
+               <th>Risk Type</th>
+               <th>Risk Setting</th>
+               <th>Settings</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for account in accounts %}
+            <tr>
+               <td>{{ account['customName'] }}</td>
+               <td>{{ account['accountId'] }}</td>
+               <td>{{ account['masterAccountName'] }}</td>
+               <td>{{ account['riskType'] }}</td>
+               <td>{{ account['riskSetting'] }}</td>
+               <td>
+                  {% if account['role'] == 'master' %}
+                  <button class="action-btn add-child-btn">Add Child</button>
+                  <button class="action-btn pause-btn">Pause Copying</button>
+                  {% elif account['role'] == 'child' %}
+                  <button class="action-btn remove-child-btn">Remove</button>
+                  <button class="action-btn resume-btn">Resume Copying</button>
+                  {% else %}
+                  <span>Unknown Role</span>
+                  {% endif %}
+               </td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+   {% endif %}
+   <div id="deleteModal" class="modal hidden">
+      <div class="modal-content">
+         <h3>Confirm</h3>
+         <p>Are you sure you want to pause copying?</p>
+         <div class="modal-actions">
+            <button id="confirmDelete" class="modal-btn danger">Confirm</button>
+            <button id="cancelDelete" class="modal-btn">Cancel</button>
+         </div>
+      </div>
+   </div>
+   <script src="{{url_for('static', filename='/js/modalManager.js')}}"></script>
+   <script>
+      const copierSettingsSection = document.querySelector('.copier-settings-section');
+      copierSettingsSection.classList.add('active-section')
+   </script>
+</div>
+{% endblock %}

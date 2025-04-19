@@ -1,0 +1,81 @@
+{% extends 'baseDashboard.html' %}
+{% block title %}
+Trade Sync: Accounts
+{% endblock %}
+{% block additional_styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/accountPageStyles.css')}}">
+{% endblock %}
+{% block dash_content %}
+<div class="dashboard-content">
+   <!-- Accounts Header -->
+   <div class="accounts-header">
+      <h2>Accounts</h2>
+      <a class="link" href="{{ url_for('page.add_account_portal') }}">
+         <button class="add-account-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+            </svg>
+            Add Account
+         </button>
+      </a>
+   </div>
+   {% if accounts | length > 0 %}
+   <!-- Accounts Section Table -->
+   <div class="table-container">
+      <table>
+         <thead>
+            <tr>
+               <th>Status</th>
+               <th>Account</th>
+               <th>Name</th>
+               <th>Balance</th>
+               <th>Role</th>
+               <th>Settings</th>
+            </tr>
+         </thead>
+         <tbody>
+    {% for account in accounts %}
+    <tr>
+        <td class="account-status {% if account.status | lower == 'active' %}active-account{% else %}inactive-account{% endif %}">
+            {{ account.status | capitalize }}
+        </td>
+        <td>{{ account.accountId }}</td>
+        <td>{{ account.customName }}</td>
+        <td>${{ account.balance }}</td>
+        <td>{{ account.role | capitalize }}</td>
+        <td>
+            <a class="link" href="{{ url_for('page.view_account', account_id=account.accountId) }}">
+                <button class="action-btn">View</button>
+            </a>
+            <a class="link" href="{{ url_for('page.edit_account_settings', account_id=account.accountId) }}">
+                <button class="action-btn">Edit</button>
+            </a>
+            <button class="action-btn remove" data-account-id="{{ account.accountId }}" data-account-name="{{ account.customName }}">Remove</button>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+
+      </table>
+      <div id="removeModal" class="modal hidden">
+         <div class="modal-content">
+            <h3>Confirm</h3>
+            <p>Are you sure you want to remove <span class="account-to-be-removed">NULL</span>?</p>
+            <div class="modal-actions">
+               <button id="confirmRemoval" class="modal-btn danger">Remove</button>
+               <button id="cancelRemoval" class="modal-btn">Cancel</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   {% else %}
+   <p class="add-account-text">Add an account to get started!</p>
+   {% endif %}
+   <script src="{{url_for('static', filename='/js/modalManager.js')}}" ></script>
+   <script>
+       const baseRemovalLink = "{{ url_for('auth.remove_trade_account', account_id='ACCOUNT_ID') }}";
+      const accountsSection = document.querySelector('.accounts-section');
+      accountsSection.classList.add('active-section')
+   </script>
+</div>
+{% endblock %}
