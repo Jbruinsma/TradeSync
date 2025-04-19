@@ -1,9 +1,0 @@
--- Account 1 --
-
-api key:   b369ecca179d11ff8609270adff3180b-4f409820737d05e98cb43f7ede8b2f06
-account id: 101-001-31017856-001
-
--- Account 2 --
-
-api key:  621a3f13e5a37e5f751374e2db3c7594-60ec5c32a799423e7e996edb90fa9b21
-account id : 101-001-31111285-001
