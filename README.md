@@ -34,3 +34,9 @@
 - **API Integration:** OANDA REST v20
 - **Frontend:** HTML, CSS, JavaScript (Flask templating)
 - **Version Control:** Git + GitHub
+
+---
+
+# WARNING
+
+- The trade copier portion of the project `copier.py`, has bugs and should not be used to copy trades yet. This is still a work in progress!
