@@ -4,7 +4,7 @@
 
 ## Key Features
 
-## **Master-to-Multiple Child Copying**  
+##      **Master-to-Multiple Child Copying**  
   One master OANDA account can be linked to multiple child accounts. All trades from the master are mirrored in the child accounts automatically.
 
 - **Web-Based Execution**  
