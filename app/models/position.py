@@ -1,13 +1,18 @@
-class Position:
+# position.py
+from trade import Trade
 
-    def __init__(self, parent_order_id, order_id, instrument, units, state, stop_loss= None, take_profit= None):
-        self.parent_order_id = parent_order_id
-        self.order_id = order_id
+class Position:
+    def __init__(self, instrument):
         self.instrument = instrument
-        self.units = units
-        self.state = state
-        self.stop_loss = stop_loss
-        self.take_profit = take_profit
+        self.trades = []
+        self.trade_ids = {}
+
+    def add_trade(self, trade: Trade):
+        if trade.instrument == self.instrument:
+            self.trades.append(trade)
+
+    def remove_trade_by_id(self, order_id):
+        self.trades = [t for t in self.trades if t.order_id != order_id]
 
     def __str__(self):
-        return f"Parent order id: {self.parent_order_id}, order_id: {self.order_id}, instrument: {self.instrument}, units: {self.units}, state: {self.state}, stop_loss: {self.stop_loss}, take_profit: {self.take_profit}"
+        return f"Position in {self.instrument}: {len(self.trades)} open trades"

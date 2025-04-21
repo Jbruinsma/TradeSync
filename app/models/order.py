@@ -1,14 +1,11 @@
-class Order:
+from app.models.base_order import BaseOrder
 
-    def __init__(self, parent_order_id,order_id, instrument, units, order_type, price, stop_loss=None, take_profit=None):
-        self.parent_order_id = parent_order_id
-        self.order_id = order_id
-        self.instrument = instrument
-        self.units = units
-        self.order_type = order_type
-        self.price = price
-        self.stop_loss = stop_loss
-        self.take_profit = take_profit
+
+class Order(BaseOrder):
+    def __init__(self, parent_order_id, order_id, instrument, units, order_type, price, stop_loss=None, take_profit=None):
+            super().__init__(parent_order_id, order_id, instrument, units, stop_loss, take_profit)
+            self.order_type = order_type
+            self.price = price
 
     def __str__(self):
         return (f"Order: parent_order_id: {self.parent_order_id}, order_id: {self.order_id}, instrument: {self.instrument}, units: {self.units},"
