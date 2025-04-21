@@ -21,6 +21,11 @@ class TradeCopier:
     def update(self):
         self.users = user_db.inorder_traversal()
 
+    async def run(self):
+        # Main loop that runs the trade copier functionalities.
+        while self.status == "active":
+            await self.iterate_users()
+
     async def iterate_users(self):
         # Iterates through a sorted array of User objects that contain master accounts.
         pass
