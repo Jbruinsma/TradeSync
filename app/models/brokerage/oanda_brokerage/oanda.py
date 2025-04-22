@@ -8,6 +8,7 @@ from app.models.order import Order
 import requests
 
 from app.models.position import Position
+from app.models.trade import Trade
 
 
 class OANDA(Brokerage):
@@ -104,7 +105,7 @@ class OANDA(Brokerage):
             order_create_transaction = response['orderCreateTransaction']
             order_fill_transaction = response['orderFillTransaction']
             if order_fill_transaction:
-                new_position = self.format_new_position(parent_order_id= parent_order_id, order= order_fill_transaction)
+                new_position = self.format_new_trade(parent_order_id= parent_order_id, order= order_fill_transaction)
                 print(f"(LINE 108 in oanda.py) NEW POSITION: {new_position}")
                 self.current_positions[str(new_position.parent_order_id)] = new_position
             else:
@@ -388,7 +389,7 @@ class OANDA(Brokerage):
         return new_order
 
     @staticmethod
-    def format_new_position(parent_order_id, order):
+    def format_new_trade(parent_order_id, order):
         print(f"(Line 384 in oanda.py) Order: {order}")
         order_id = order['id']
         instrument = order['instrument']
@@ -402,7 +403,13 @@ class OANDA(Brokerage):
             take_profit = order['takeProfitOnFill']
         else:
             take_profit = None
-        return Position(parent_order_id= parent_order_id, order_id= order_id, instrument= instrument, units= units, state= state, stop_loss= stop_loss, take_profit= take_profit)
+        return Trade(parent_order_id= parent_order_id,
+                     order_id= order_id,
+                     instrument= instrument,
+                     units= units,
+                     state= state,
+                     stop_loss= stop_loss,
+                     take_profit= take_profit)
 
     @staticmethod
     def _calculate_price(base_price, pips, is_buy, instrument, price_type):

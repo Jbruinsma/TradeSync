@@ -11,7 +11,8 @@ def run_trade_copier(trade_copier):
     async def copier_main():
         user_db.add_observer(trade_copier)
         trade_copier.start()
-        await trade_copier.process_users()
+        await trade_copier.run()
+    
     asyncio.run(copier_main())
 
 if __name__ == '__main__':
