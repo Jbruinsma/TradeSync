@@ -72,21 +72,21 @@ class TradeCopier:
     async def handle_account_changes(self, child_account: OANDA, changes: Dict):
         """Handle different types of changes in the master account"""
 
-        # 1) New Orders
+        # 1) New Orders (MARKET/LIMIT/STOP, but NOT pure SL/TP attachments)
         for order in changes.get("ordersCreated", []):
-            if "replacesOrderID" not in order:
+            if "replacesOrderID" not in order and order["type"] not in ("TAKE_PROFIT", "STOP_LOSS"):
                 await self.handle_new_order(child_account, order)
 
-        # 2) Cancellations (either replacements or pure cancellations)
+        # 2) Cancellations (either replacements or pure cancels)
         for order in changes.get("ordersCancelled", []):
             if "replacedByOrderID" in order:
-                # this is an order‐modification flow (including TP/SL additions)
+                # this is an order‐modification (including TP/SL edits)
                 await self.handle_order_modification(child_account, order, changes)
             else:
-                # pure cancellation
+                # a straight cancel
                 await self.handle_order_cancellation(child_account, order)
 
-        # 3) Fills
+        # 3) Fills (market fills are re‐routed into handle_new_order)
         for order in changes.get("ordersFilled", []):
             await self.handle_order_fill(child_account, order)
 
@@ -94,24 +94,64 @@ class TradeCopier:
         for trade in changes.get("tradesClosed", []):
             await self.handle_trade_closure(child_account, trade)
 
-        # 5) SL/TP added after market fills
-        for order in changes.get("ordersCreated", []):
-            if order["type"] in ["TAKE_PROFIT", "STOP_LOSS"] and "tradeID" in order:
-                await self.handle_post_fill_sl_tp_order(child_account, order)
+        # 5) SL/TP added to existing open trades → batch per-trade
+        sltp = [
+            o for o in changes.get("ordersCreated", [])
+            if o["type"] in ("TAKE_PROFIT", "STOP_LOSS") and "tradeID" in o
+        ]
+        # group by master trade ID
+        groups: Dict[str, Dict[str, str]] = {}
+        for o in sltp:
+            grp = groups.setdefault(o["tradeID"], {})
+            grp[o["type"]] = o["price"]
+
+        for master_trade_id, vals in groups.items():
+            child_trade_id = self.trade_mappings.get(master_trade_id)
+            if not child_trade_id:
+                print(f"[TC] ⚠️ No child mapping for master trade {master_trade_id}")
+                continue
+
+            # extract new SL/TP (one or both may be present)
+            sl = vals.get("STOP_LOSS")
+            tp = vals.get("TAKE_PROFIT")
+            print(f"[TC] Updating child trade {child_trade_id}: SL={sl} TP={tp}")
+
+            try:
+                child_account.update_trade_orders(child_trade_id, stop_loss=sl, take_profit=tp)
+            except Exception as e:
+                print(f"[TC] Error updating SL/TP on trade {child_trade_id}: {e}")
 
     async def handle_new_order(self, child_account: OANDA, order: Dict):
+        """
+        Handle creation of new orders (including MARKET fills and replacement payloads).
+        Ensures we map both:
+          • master order ID → child order ID   (for cancels/mods)
+          • master trade ID  → child trade ID   (for SL/TP edits)
+        """
         try:
             response = child_account.create_order(order)
             if not response:
                 return
 
-            # Store mapping between master and child orders
+            # 1) Map the master order → child order (for cancellations/mods)
             self.order_mappings[order["id"]] = response["orderCreateTransaction"]["id"]
 
-            # If order was immediately filled, store trade mapping
+            # 2) If the child immediately filled this (MARKET or limit hit),
+            #    capture the child trade ID.
             fill_tx = response.get("orderFillTransaction")
-            if fill_tx:
-                self.trade_mappings[order["id"]] = fill_tx["tradeOpened"]["id"]
+            if fill_tx and "tradeOpened" in fill_tx:
+                child_trade_id = fill_tx["tradeOpened"]["tradeID"]
+
+                # a) map by the master order ID
+                self.trade_mappings[order["id"]] = child_trade_id
+
+                # b) map by the master trade ID
+                #    – for MARKET fills, master trade ID is in the incoming `order` dict
+                #    – for LIMIT fills it’s also in that dict under 'tradeOpenedID'
+                master_trade_id = order.get("tradeOpenedID") or order.get("tradeOpened") or fill_tx["tradeOpened"][
+                    "tradeID"]
+                if master_trade_id:
+                    self.trade_mappings[str(master_trade_id)] = child_trade_id
 
         except Exception as e:
             print(f"Error creating order on child account: {e}")
@@ -147,43 +187,58 @@ class TradeCopier:
 
         except Exception as e:
             print(f"Error modifying order on child account: {e}")
+
     async def handle_order_fill(self, child_account: OANDA, order: Dict):
-        """Handle when an order is filled"""
-        # For market orders, this is handled in handle_new_order
+        """
+        Handle when an order is filled.
+        • MARKET: reroute into handle_new_order (so it sets up the above mappings).
+        • LIMIT/STOP: extract the master tradeOpenedID and map it to the existing child trade.
+        """
+        # 1) MARKET goes through create_order → fills mapping above
         if order["type"] == "MARKET":
+            await self.handle_new_order(child_account, order)
             return
 
-        # For limit/stop orders, we need to handle the fill
-        child_order_id = self.order_mappings.get(order["id"])
-        if not child_order_id:
+        # 2) LIMIT/STOP fills: map master trade → child trade
+        #    master_order_id → child trade was already set in handle_new_order
+        master_order_id = order["id"]
+        master_trade_id = order.get("tradeOpenedID") or order.get("tradeID")
+        if not master_trade_id:
             return
 
-        try:
-            # The broker should fill the child order automatically.
-            # We just need to update our mappings
-            if "tradeOpenedID" in order:
-                self.trade_mappings[order["id"]] = order["tradeOpenedID"]
-        except Exception as e:
-            print(f"Error handling order fill on child account: {e}")
+        child_trade_id = self.trade_mappings.get(str(master_order_id))
+        if child_trade_id:
+            # record the trade mapping under the master trade ID
+            self.trade_mappings[str(master_trade_id)] = child_trade_id
 
     async def handle_trade_closure(self, child_account: OANDA, trade: Dict):
-        """Handle closing of trades"""
+        """Handle closing of trades, but only if they’re still open in the child."""
         child_trade_id = self.trade_mappings.get(trade["id"])
         if not child_trade_id:
             return
 
+        # 1) Fetch child’s open trades once
         try:
-            # Close the trade on child account
-            child_account.close_open_trade(child_trade_id, None)
-            
-            # Remove mappings
-            del self.trade_mappings[trade["id"]]
-            if trade.get("takeProfitOrderID") in self.order_mappings:
-                del self.order_mappings[trade["takeProfitOrderID"]]
-            if trade.get("stopLossOrderID") in self.order_mappings:
-                del self.order_mappings[trade["stopLossOrderID"]]
+            open_resp = child_account.get_open_trades()
+            open_trades = {t["id"] for t in open_resp.get("trades", [])}
         except Exception as e:
-            print(f"Error closing trade on child account: {e}")
+            print(f"[TC] Couldn’t fetch open trades: {e}")
+            return
+
+        # 2) Skip if already closed
+        if child_trade_id not in open_trades:
+            # Clean up mapping so we never try again
+            del self.trade_mappings[trade["id"]]
+            return
+
+        # 3) Otherwise, actually close it
+        try:
+            child_account.close_open_trade(child_trade_id, None)
+        except Exception as e:
+            print(f"[TC] Error closing trade on child account: {e}")
+        finally:
+            # Always remove the mapping once we’ve attempted
+            del self.trade_mappings[trade["id"]]
 
     async def handle_post_fill_sl_tp_order(self, child_account: OANDA, order: Dict):
         trade_id = order.get("tradeID")
