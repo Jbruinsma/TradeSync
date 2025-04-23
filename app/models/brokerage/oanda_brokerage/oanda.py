@@ -103,11 +103,11 @@ class OANDA(Brokerage):
             )
             print(f"(Line 103 in oanda.py) FULL RESPONSE: {response}")
             order_create_transaction = response['orderCreateTransaction']
-            order_fill_transaction = response['orderFillTransaction']
+            order_fill_transaction = response.get('orderFillTransaction')
             if order_fill_transaction:
-                new_position = self.format_new_trade(parent_order_id= parent_order_id, order= order_fill_transaction)
-                print(f"(LINE 108 in oanda.py) NEW POSITION: {new_position}")
-                self.current_positions[str(new_position.parent_order_id)] = new_position
+                new_trade = self.format_new_trade(parent_order_id= parent_order_id, order= order_fill_transaction)
+                print(f"(LINE 108 in oanda.py) NEW TRADE: {new_trade}")
+                self.current_positions[str(new_trade.parent_order_id)] = new_trade
             else:
                 new_order = self.format_new_order(parent_order_id= parent_order_id, api_response= order_create_transaction)
                 print(f"(LINE 112 in oanda.py) NEW ORDER: {new_order}")
