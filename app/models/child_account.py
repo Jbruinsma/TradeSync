@@ -2,8 +2,8 @@ from app.models.trade_account import TradeAccount
 
 
 class ChildAccount(TradeAccount):
-    def __init__(self, custom_name, brokerage, account_id, include_in_portfolio, master_account_id):
-        super().__init__(custom_name, brokerage, account_id, include_in_portfolio)
+    def __init__(self, custom_name, brokerage, account_id, include_in_portfolio, master_account_id, account_summary):
+        super().__init__(custom_name, brokerage, account_id, include_in_portfolio, account_summary)
         self.account_owner = None
         self.account_owner_email = None
         self.master_account_id = master_account_id
@@ -28,6 +28,8 @@ class ChildAccount(TradeAccount):
             return f'{self.brokerage.settings.multiplier_factor}x'
         elif self.get_risk_type() == 'fixed':
             return f'{self.brokerage.settings.fixed_trade_size}x'
+        return None
+
     def set_account_owner(self, account_owner= None, account_owner_email= None):
         if account_owner is not None:
             self.account_owner = account_owner

@@ -1,11 +1,15 @@
+from flask import session
+
 from app.models.trade_account import TradeAccount
 from app.models.child_account import ChildAccount
 from app.models.brokerage.oanda_brokerage.oanda import OANDA
 from app.models.settings import Settings
+from app.utils.account_utils import format_account_summary
+
 
 class MasterAccount(TradeAccount):
-    def __init__(self, custom_name, brokerage, account_id, api_key, is_live, include_in_portfolio):
-        super().__init__(custom_name, brokerage, account_id, include_in_portfolio)
+    def __init__(self, custom_name, brokerage, account_id, api_key, is_live, include_in_portfolio, account_summary):
+        super().__init__(custom_name, brokerage, account_id, include_in_portfolio, account_summary)
         self.active_copier = True
         self.child_accounts = {}
         self.child_account_ids = {}
@@ -20,15 +24,18 @@ class MasterAccount(TradeAccount):
             settings = self._create_settings(account_settings, risk_settings)
             brokerage = self._create_brokerage(new_account_info)
 
+            account_summary = format_account_summary(session['account_summary'])
+
             if self.has_child_account_id(account_id) or account_id == self.account_id:
-                return 
+                return None
             
             child_account = ChildAccount(
                 custom_name= account_settings['custom_name'],
                 brokerage= brokerage,
                 account_id= account_id,
                 include_in_portfolio= account_settings['include_in_portfolio'] == "true",
-                master_account_id= self.account_id
+                master_account_id= self.account_id,
+                account_summary= account_summary
             )
             child_account.set_settings(settings)
             
@@ -75,6 +82,7 @@ class MasterAccount(TradeAccount):
                 fixed_take_profit_size=account_settings['fixed_take_profit_size'],
                 trade_closure_approach=account_settings['trade_closure']
             )
+        return None
 
     def _create_master_account(self, new_account_info, settings):
         brokerage = self._create_brokerage(new_account_info)
@@ -86,6 +94,7 @@ class MasterAccount(TradeAccount):
             is_live=new_account_info['account_type'] == 'live',
             include_in_portfolio=settings.include_in_portfolio.data == "true"
         )
+
     @staticmethod
     def _create_brokerage(account_info):
         if account_info['brokerage'] == 'oanda':

@@ -1,3 +1,6 @@
+from flask import session
+
+from app.utils.account_utils import format_account_summary
 from app.utils.password_utils import hash_password, verify_password
 from datetime import datetime
 
@@ -28,12 +31,16 @@ class User:
         return verify_password(password, self.password_hash)
     
     def register_master_account(self, new_account_info, settings):
-        account_id = new_account_info['account_id']
-        custom_name = settings.custom_name.data
-        api_key = new_account_info['api_key']
-        trade_account_type = True if new_account_info['account_type'] == 'live' else False
-        include_in_portfolio_value = True if settings.include_in_portfolio.data == "true" else False
-        brokerage = new_account_info['brokerage']
+        try:
+            account_id = new_account_info['account_id']
+            custom_name = settings.custom_name.data
+            api_key = new_account_info['api_key']
+            trade_account_type = True if new_account_info['account_type'] == 'live' else False
+            include_in_portfolio_value = True if settings.include_in_portfolio.data == "true" else False
+            brokerage = new_account_info['brokerage']
+            account_summary = format_account_summary(session['account_summary'])
+        except KeyError:
+            return
 
         if account_id in self.master_accounts:
             print(f'Account {account_id} already exists')
@@ -53,7 +60,8 @@ class User:
              account_id=account_id, 
              api_key=api_key, 
              is_live=trade_account_type, 
-             include_in_portfolio=include_in_portfolio_value
+             include_in_portfolio=include_in_portfolio_value,
+             account_summary=account_summary
              )
         
         self.master_accounts[account_id] = new_master_account

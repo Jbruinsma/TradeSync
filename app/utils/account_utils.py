@@ -42,3 +42,15 @@ def get_total_open_positions(user):
     for account in get_accounts_list(user):
         total_open_positions += account.get_open_positions()
     return total_open_positions
+
+def format_account_summary(account_info):
+    print(f'Account Info: {account_info}')
+    return {
+        'balance': account_info['account']['balance'],
+        'currency': account_info['account']['currency'],
+        'pl': account_info['account']['pl'],
+        'openTradeCount': account_info['account']['openTradeCount'],
+        'openPositionCount': account_info['account']['openPositionCount'],
+        'pendingOrderCount': account_info['account']['pendingOrderCount'],
+        'lastTransactionID': account_info['lastTransactionID'],
+    }

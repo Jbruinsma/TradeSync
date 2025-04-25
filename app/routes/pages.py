@@ -34,7 +34,6 @@ def index():
 def login_portal():
     form = LoginForm()
     if form.validate_on_submit():
-        print("FORM VALIDATED!")
         username = form.username.data
         password = form.password.data
         try:
@@ -69,6 +68,10 @@ def dashboard():
         return redirect(url_for('page.login_portal'))
 
     accounts = get_accounts_list(user)
+
+    for account in accounts:
+        print(account.get_account_summary())
+
     table_columns = ['status', 'custom name', 'balance', 'equity', 'open trades', 'open pl', 'day pl', 'week pl', 'month pl', 'total pl']
     table_info = get_table_values(table_columns, accounts)
     portfolio_value = format_value(user.get_portfolio_value())
@@ -141,6 +144,16 @@ def account_info(account_role, brokerage):
         print(form.data)
         session['trading_account_info'] = form.data
         session['trading_account_info']['brokerage'] = brokerage
+
+        api_key = form.data['api_key']
+        account_id = form.data['account_id']
+        is_live = False if form.data['account_type'] == 'demo' else True
+
+        if brokerage == 'oanda':
+            temp_brokerage_obj = OANDA(account_id, api_key, is_live)
+            account_summary = temp_brokerage_obj.get_summary()
+            session['account_summary'] = account_summary
+
 
         if account_role == 'child':
             return redirect(url_for('page.add_child_account', brokerage= brokerage))
