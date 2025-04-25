@@ -18,7 +18,7 @@ def run_trade_copier(trade_copier):
 if __name__ == '__main__':
     copier = TradeCopier()
     copier_thread = threading.Thread(target=run_trade_copier, args=(copier,))
-    copier_thread.start()
+    # copier_thread.start()
 
     try:
         app.run(debug=True, use_reloader=False)
