@@ -1,5 +1,4 @@
 from app.models.brokerage.oanda_brokerage.oanda import OANDA
-from app.models.queue.queue import ProfitQueue
 
 
 class TradeAccount:
@@ -12,7 +11,7 @@ class TradeAccount:
         self.last_transaction_id : str = ""
 
         self.meta : dict = account_summary # {'balance': int, 'currency': str, 'pl': str, 'OpenTradeCount': str, 'openPositionCount': str, 'pendingOrderCount': str, 'lastTransactionID': str}
-        self.profits = {'month': ProfitQueue(), 'week': ProfitQueue(), 'day': 0}
+        self.profits = {'month': [], 'week': [], 'day': 0}
 
     def get_account_summary(self) -> dict:
         return self.meta

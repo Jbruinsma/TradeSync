@@ -82,6 +82,7 @@ class TradeCopier:
 
         # 4) Trade closures
         for trade in changes.get("tradesClosed", []):
+            print("(Line 85 in copier.py) TRADE IS BEING CLOSED!")
             await self.handle_trade_closure(child, trade)
 
         # 5) Batch SL/TP attachments
@@ -186,8 +187,9 @@ class TradeCopier:
 
     async def handle_trade_closure(self, child_account: OANDA, trade: Dict):
         # look up by the master-side tradeID, not "id"
-        master_tid = trade.get("tradeID")
+        master_tid = trade.get("id")
         if not master_tid:
+            print(f"[TC] ⚠️ No tradeID in closure event: {trade}")
             return
 
         child_tid = self.trade_mappings.pop(master_tid, None)
@@ -199,6 +201,7 @@ class TradeCopier:
         try:
             open_trades = {t["id"] for t in child_account.get_open_trades().get("trades", [])}
             if child_tid not in open_trades:
+                print("(Line 203 in copier.py) Child trade is already closed")
                 return
         except Exception as e:
             print(f"[TC] Couldn’t fetch child open trades: {e}")
@@ -225,12 +228,12 @@ class TradeCopier:
         except Exception as e:
             print(f"Error applying SL/TP to trade {child_trade_id}: {e}")
 
-    async def handle_order_cancellation(self, child: OANDA, order: Dict):
+    async def handle_order_cancellation(self, child_account_brokerage: OANDA, order: Dict):
         master_oid = order.get("id")
         if master_oid not in self.order_mappings:
             return
         try:
-            child.cancel_order(master_oid)
+            child_account_brokerage.cancel_order(master_oid)
         except Exception as e:
             print(f"Error cancelling child for master {master_oid}: {e}")
         finally:

@@ -178,7 +178,7 @@ class OANDA(Brokerage):
     def cancel_order(self, parent_order_id):
         if parent_order_id not in self.current_orders:
             print('ORDER NOT FOUND')
-            return
+            return None
         else:
             order = self.current_orders[parent_order_id]
             order_id = order.order_id
@@ -390,7 +390,7 @@ class OANDA(Brokerage):
 
     @staticmethod
     def format_new_trade(parent_order_id, order):
-        print(f"(Line 384 in oanda.py) Order: {order}")
+        print(f"(Line 3936 in oanda.py) Order: {order}")
         order_id = order['id']
         instrument = order['instrument']
         units = order['units']
